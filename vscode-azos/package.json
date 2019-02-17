@@ -5,7 +5,7 @@
     "version": "0.0.1",
     "publisher": "azist",
     "license": "SEE LICENSE IN LICENSE.md",
-    "icon": "images/azos-logo-320x320.png",
+    "icon": "img/azos-logo-320x320.png",
     "galleryBanner": {
         "color": "#252522",
         "theme": "dark"

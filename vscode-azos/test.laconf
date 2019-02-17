@@ -1,0 +1,14 @@
+app
+{
+    log
+    {
+name=111
+type=222
+"ssssssssssssssssssssss"{
+a=2345
+b=234234
+
+}
+
+    }
+}
