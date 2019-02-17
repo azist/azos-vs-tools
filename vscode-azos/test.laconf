@@ -2,10 +2,10 @@ app
 {
   log
   {
-    name =111
-    type =222
+    name=111
+    type=222
   }
-
+procedure ssss()
 /*
  wssssss
 */
