@@ -1,0 +1,49 @@
+{
+    "name": "azos",
+    "displayName": "Azos support",
+    "description": "Azos support (Laconic+Sky Metabase syntax highlighting)",
+    "version": "0.0.1",
+    "publisher": "azist",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "icon": "images/azos-logo-320x320.png",
+    "galleryBanner": {
+        "color": "#252522",
+        "theme": "dark"
+    },
+    "homepage": "https://github.com/azist/azos-vs-tools",
+    "bugs": {
+        "url": "https://github.com/azist/azos-vs-tools/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/azist/azos-vs-tools"
+    },
+    "engines": {
+        "vscode": "^0.10.1"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "laconf",
+                "aliases": [
+                    "Azos Laconic Configuration",
+                    "laconf"
+                ],
+                "extensions": [
+                    ".laconf",".laconic",".laconfig"
+                ],
+                "configuration": "./laconf.configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "laconf",
+                "scopeName": "source.laconf",
+                "path": "./syntaxes/laconf.tmLanguage"
+            }
+        ]
+    }
+}
