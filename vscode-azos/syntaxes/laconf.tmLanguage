@@ -5,6 +5,9 @@
 	<key>fileTypes</key>
 	<array>
 		<string>laconf</string>
+		<string>laconic</string>
+		<string>laconfig</string>
+		<string>lacon</string>
 	</array>
 	<key>keyEquivalent</key>
 	<string>^~P</string>
@@ -14,51 +17,9 @@
 	<array>
 		<dict>
 			<key>match</key>
-			<string>\b(app|log|glue|data-store|security|instrumentation|wave|event-timer)\b</string>
+			<string>\b(?i:(app|log|instrumentation|data-store|object-store|glue|event-timer))\b</string>
 			<key>name</key>
-			<string>keyword.operator.laconf</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>//</string>
-			<key>end</key>
-			<string>$</string>
-			<key>name</key>
-			<string>comment.line.double-slash.laconf</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>"</string>
-			<key>end</key>
-			<string>"</string>
-			<key>name</key>
-			<string>string.quoted.double.laconf</string>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>'</string>
-			<key>end</key>
-			<string>'"</string>
-			<key>name</key>
-			<string>string.quoted.single.laconf</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(provider|name|type|order|service)\b</string>
-			<key>name</key>
-			<string>constant.language.laconf</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>^(import)\s</string>
-			<key>name</key>
-			<string>keyword.control.import.laconf</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b((([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)(L|l|F|f)?\b</string>
-			<key>name</key>
-			<string>constant.numeric.laconf</string>
+			<string>keyword.laconf</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -66,15 +27,140 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
+					<string>storage.type.prototype.laconf</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.prototype.laconf</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>\b(?i:(function|procedure|constructor|destructor))\b\s+(\w+(\.\w+)?)(\(.*?\))?;\s*(?=(?i:attribute|forward|external))</string>
+			<key>name</key>
+			<string>meta.function.prototype.laconf</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.laconf</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
 					<string>entity.name.function.laconf</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>\b([a-zA-Z0-9_\.]*?)\(</string>
+			<string>\b(?i:(function|procedure|constructor|destructor|property|read|write))\b\s+(\w+(\.\w+)?)</string>
+			<key>name</key>
+			<string>meta.function.laconf</string>
+		</dict>
+			<dict>
+			<key>match</key>
+			<string>\b(?i:(name|type))\b</string>
+			<key>name</key>			
+			<string>token.variable</string>
+		</dict>	
+		<dict>
+			<key>match</key>
+			<string>\b(?i:(and|or))\b</string>
+			<key>name</key>			
+			<string>keyword.operator.laconf</string>
+		</dict>	
+		<dict>
+			<key>match</key>
+			<string>\b(?i:(break|continue|exit|abort|while|do|for|raise|repeat|until))\b</string>
+			<key>name</key>			
+			<string>keyword.control.laconf</string>
+		</dict>	
+
+		<dict>
+			<key>begin</key>
+			<string>\{\$</string>
+			<key>captures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>string.regexp</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\}</string>
+			<key>name</key>
+			<string>string.regexp</string>
+		</dict>	
+
+		<dict>
+			<key>match</key>
+			<string>\b(?i:(ansichar|ansistring|boolean|byte|cardinal|char|comp|currency|double|dword|extended|file|integer|int64|longint|longword|nativeint|nativeuint|olevariant|pansichar|pchar|pwidechar|pointer|real|shortint|shortstring|single|smallint|string|uint64|variant|widechar|widestring|word|wordbool))\b</string>
+			<key>name</key>			
+			<string>storage.support.type.laconf</string>
+		</dict>	
+		<dict>
+			<key>match</key>
+			<string>\b(\d+)|(\d*\.\d+([eE][\-+]?\d+)?)\b</string>
+			<key>name</key>
+			<string>constant.numeric.laconf</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\$[0-9a-fA-F]{1,16}\b</string>
+			<key>name</key>
+			<string>constant.numeric.hex.laconf</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(?i:(true|false|nil))\b</string>
+			<key>name</key>
+			<string>constant.language.laconf</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(?i:(Assert))\b</string>
+			<key>name</key>
+			<string>keyword.control</string>
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>/\*</string>
+			<string>(^[ \t]+)?(?=//)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.whitespace.comment.leading.laconf</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(?!\G)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>//</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.laconf</string>
+						</dict>
+					</dict>
+					<key>end</key>
+					<string>\n</string>
+					<key>name</key>
+					<string>comment.line.double-slash.laconf.two</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>\|\*</string>
 			<key>captures</key>
 			<dict>
 				<key>0</key>
@@ -84,13 +170,13 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>\*/</string>
+			<string>\*\|</string>
 			<key>name</key>
-			<string>comment.block.laconf</string>
+			<string>comment.block.laconf.one</string>
 		</dict>
-		<dict>
+		<!--dict>
 			<key>begin</key>
-			<string>|\*</string>
+			<string>\{(?!\$)</string>
 			<key>captures</key>
 			<dict>
 				<key>0</key>
@@ -100,25 +186,48 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>\*|</string>
+			<string>\}</string>
 			<key>name</key>
-			<string>comment.block.laconf</string>
-		</dict>
+			<string>comment.block.laconf.two</string>
+		</dict-->
 		<dict>
 			<key>begin</key>
-			<string>//</string>
+			<string>'</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.comment.laconf</string>
+					<string>punctuation.definition.string.begin.laconf</string>
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>$\n?</string>
+			<string>'</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.laconf</string>
+				</dict>
+			</dict>
 			<key>name</key>
-			<string>comment.line.double-slash.laconf</string>
+			<string>string.quoted.single.laconf</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>''</string>
+					<key>name</key>
+					<string>constant.character.escape.apostrophe.laconf</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\#\d+</string>
+			<key>name</key>
+			<string>string.other.laconf</string>
 		</dict>
 	</array>
 	<key>scopeName</key>

@@ -1,14 +1,22 @@
-app
+app 
 {
-    log
-    {
-name=111
-type=222
-"ssssssssssssssssssssss"{
-a=2345
-b=234234
+  log
+  {
+    name =111
+    type =222
+  }
 
-}
+/*
+ wssssss
+*/
 
-    }
+|*d
+edddddd
+*|
+a=2
+naMe='123'
+name=32
+'string'
+"string"
+
 }

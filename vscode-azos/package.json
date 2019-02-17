@@ -33,7 +33,7 @@
                     "laconf"
                 ],
                 "extensions": [
-                    ".laconf",".laconic",".laconfig"
+                    ".laconf",".laconic",".laconfig",".lacon"
                 ],
                 "configuration": "./laconf.configuration.json"
             }
