@@ -1,7 +1,7 @@
 {
     "name": "azos",
-    "displayName": "Azos support",
-    "description": "Azos support (Laconic+Sky Metabase syntax highlighting)",
+    "displayName": "Azos Framework Support",
+    "description": "Azos Framework Support (Laconic+Sky Metabase syntax highlighting)",
     "version": "0.0.1",
     "publisher": "azist",
     "license": "SEE LICENSE IN LICENSE.md",
@@ -42,7 +42,7 @@
             {
                 "language": "laconf",
                 "scopeName": "source.laconf",
-                "path": "./syntaxes/laconf.tmLanguage"
+                "path": "./syntaxes/laconf.tmLanguage.json"
             }
         ]
     }

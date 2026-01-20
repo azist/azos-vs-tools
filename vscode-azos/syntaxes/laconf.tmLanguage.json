@@ -1,0 +1,234 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Azos Laconic Configuration",
+  "scopeName": "source.laconf",
+  "fileTypes": ["laconf", "laconic", "laconfig", "lacon"],
+  "patterns": [
+    { "include": "#directives" },
+    { "include": "#comments" },
+    { "include": "#keywords" },
+    { "include": "#strings" },
+    { "include": "#variable-expansion" },
+    { "include": "#structural" },
+    { "include": "#constants" }
+  ],
+  "repository": {
+    "directives": {
+      "patterns": [
+        {
+          "name": "meta.preprocessor.laconf",
+          "match": "^\\s*#.*$",
+          "captures": {
+            "0": { "name": "keyword.control.directive.laconf" }
+          }
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.laconf",
+          "begin": "//",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.comment.laconf" }
+          },
+          "end": "$"
+        },
+        {
+          "name": "comment.block.c-style.laconf",
+          "begin": "/\\*",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.comment.begin.laconf" }
+          },
+          "end": "\\*/",
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.comment.end.laconf" }
+          }
+        },
+        {
+          "name": "comment.block.alternate.laconf",
+          "begin": "\\|\\*",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.comment.begin.laconf" }
+          },
+          "end": "\\*\\|",
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.comment.end.laconf" }
+          }
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "constant.language.null.laconf",
+          "match": "(?<![\\w.-])(null)(?![\\w.-])"
+        },
+        {
+          "name": "keyword.other.laconf",
+          "match": "(?<![\\w.-])(name|type)(?![\\w.-])"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        { "include": "#string-verbatim-double" },
+        { "include": "#string-verbatim-single" },
+        { "include": "#string-regular-double" },
+        { "include": "#string-regular-single" }
+      ]
+    },
+    "string-verbatim-double": {
+      "name": "string.quoted.double.verbatim.laconf",
+      "begin": "\\$\"",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.string.begin.laconf" }
+      },
+      "end": "\"",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.end.laconf" }
+      },
+      "patterns": [
+        {
+          "name": "constant.character.escape.quote.laconf",
+          "match": "\"\""
+        },
+        { "include": "#variable-expansion-in-string" }
+      ]
+    },
+    "string-verbatim-single": {
+      "name": "string.quoted.single.verbatim.laconf",
+      "begin": "\\$'",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.string.begin.laconf" }
+      },
+      "end": "'",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.end.laconf" }
+      },
+      "patterns": [
+        {
+          "name": "constant.character.escape.quote.laconf",
+          "match": "''"
+        },
+        { "include": "#variable-expansion-in-string" }
+      ]
+    },
+    "string-regular-double": {
+      "name": "string.quoted.double.laconf",
+      "begin": "(?<!\\$)\"",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.string.begin.laconf" }
+      },
+      "end": "\"|(?=\\n)",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.end.laconf" }
+      },
+      "patterns": [
+        { "include": "#string-escape-sequences" },
+        { "include": "#variable-expansion-in-string" }
+      ]
+    },
+    "string-regular-single": {
+      "name": "string.quoted.single.laconf",
+      "begin": "(?<!\\$)'",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.string.begin.laconf" }
+      },
+      "end": "'|(?=\\n)",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.end.laconf" }
+      },
+      "patterns": [
+        { "include": "#string-escape-sequences" },
+        { "include": "#variable-expansion-in-string" }
+      ]
+    },
+    "string-escape-sequences": {
+      "patterns": [
+        {
+          "name": "constant.character.escape.laconf",
+          "match": "\\\\(['\"\\\\/0abfnrtv]|u[0-9a-fA-F]{4}|x[0-9a-fA-F]+)"
+        },
+        {
+          "name": "invalid.illegal.unknown-escape.laconf",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "variable-expansion": {
+      "patterns": [
+        {
+          "name": "variable.other.laconf",
+          "begin": "\\$\\(",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.variable.begin.laconf" }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.variable.end.laconf" }
+          },
+          "patterns": [
+            {
+              "name": "variable.other.environment.laconf",
+              "match": "~[^)]*"
+            }
+          ]
+        }
+      ]
+    },
+    "variable-expansion-in-string": {
+      "patterns": [
+        {
+          "name": "meta.embedded.variable.laconf",
+          "begin": "\\$\\(",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.variable.begin.laconf" }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.variable.end.laconf" }
+          },
+          "patterns": [
+            {
+              "name": "variable.other.environment.laconf",
+              "match": "~[^)]*"
+            }
+          ]
+        }
+      ]
+    },
+    "structural": {
+      "patterns": [
+        {
+          "name": "punctuation.section.block.begin.laconf",
+          "match": "\\{"
+        },
+        {
+          "name": "punctuation.section.block.end.laconf",
+          "match": "\\}"
+        },
+        {
+          "name": "keyword.operator.assignment.laconf",
+          "match": "="
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.numeric.float.laconf",
+          "match": "\\b\\d*\\.\\d+([eE][+-]?\\d+)?\\b"
+        },
+        {
+          "name": "constant.numeric.integer.laconf",
+          "match": "\\b\\d+\\b"
+        },
+        {
+          "name": "constant.numeric.hex.laconf",
+          "match": "\\b0[xX][0-9a-fA-F]+\\b"
+        }
+      ]
+    }
+  }
+}
