@@ -1,0 +1,211 @@
+// Comprehensive LACONFIG Test File
+// Tests all language features for syntax highlighting
+
+#pragma warning disable
+# This is a directive - should be highlighted as preprocessor
+
+/* Standard C-style block comment
+   Multiple lines
+   Should be highlighted as comment */
+
+|* Alternative block comment style
+   Used when you need to comment out code
+   that already contains /* */ comments *|
+
+// ========================================
+// SECTION: Basic Structure
+// ========================================
+
+app-root="RootValue"
+{
+  // Simple attribute
+  name = "test-application"
+  
+  // Attribute with null value
+  disabled = null
+  
+  // Keywords: name and type should be highlighted
+  type = "Application.Type"
+  
+  // Section without value
+  logger
+  {
+    path = $"c:\logs\app.log"
+    level = debug
+  }
+  
+  // Section with value (mixed node - has value AND children)
+  database = production
+  {
+    connection = "Server=localhost;Database=test"
+    timeout = 30
+  }
+}
+
+// ========================================
+// SECTION: String Types
+// ========================================
+
+strings
+{
+  // Regular double-quoted string with escapes
+  regular-double = "Line 1\nLine 2\tTabbed\u0041"
+  
+  // Regular single-quoted string with escapes
+  regular-single = 'It\'s a string with \"quotes\"'
+  
+  // Verbatim double-quoted multiline string
+  verbatim-double = $"This is a
+    multiline string that
+    preserves all whitespace
+    and has ""quotes"" escaped by doubling"
+  
+  // Verbatim single-quoted multiline string  
+  verbatim-single = $'Another
+    multiline approach using
+    single quotes with ''escaped'' quotes'
+  
+  // JavaScript/JSON example in verbatim string
+  script = $"
+    function validate(input) {
+      if (input === null) return false;
+      return true;
+    }
+  "
+}
+
+// ========================================
+// SECTION: Variable Expansion
+// ========================================
+
+variables
+{
+  // Environment variable (starts with ~)
+  home-path = $(~SKY_HOME)
+  user-name = "User name is: $(~USERNAME)"
+  app-path = $(~APPDATA)
+  
+  // Regular variable reference
+  log-dir = "logs"
+  log-root = "$(home-path)/$(log-dir)"
+  
+  // Complex path with multiple variables
+  full-path = "$($home-path)$(@$log-dir)/$(~HOSTNAME).log"
+  
+  // Variables inside regular strings
+  message = "User $(user-name) logged in at $(timestamp)"
+  
+  // Variables inside verbatim strings
+  template = $"
+    Home: $(~HOME)
+    User: $(~USER)
+    Path: $(app-path)
+  "
+}
+
+// ========================================
+// SECTION: Numeric Constants
+// ========================================
+
+numbers
+{
+  integer = 42
+  negative = -123
+  float = 3.14159
+  scientific = 1.23e-10
+  hex = 0xFF00AB
+  large = 1000000
+}
+
+// ========================================
+// SECTION: Complex Nested Structure
+// ========================================
+
+glue
+{
+  client-log-level = "Error"
+  server-log-level = "Info"
+  
+  bindings
+  {
+    // Binding with type attribute
+    binding
+    {
+      name = "async"
+      type = "Azos.Glue.Native.MpxBinding"
+      max-connections = 100
+    }
+    
+    binding = sync-binding
+    {
+      name = "sync"
+      type = "Azos.Glue.Native.SyncBinding"
+      timeout = 5000
+    }
+  }
+  
+  servers
+  {
+    server
+    {
+      name = "main-server"
+      node = "sync://localhost:8080"
+      contract-servers = "MyApp.Services.*, MyApp"
+    }
+  }
+}
+
+// ========================================
+// SECTION: Real-world Configuration
+// ========================================
+
+data-store = "MongoDB.NFX.MongoDBDataStore, NFX.MongoDB"
+{
+  connect-string = "mongodb://localhost:27017"
+  database = $(~DB_NAME)
+  
+  // Collection with complex connection string
+  collection = users
+  {
+    indexes = $"
+      [
+        { ""key"": { ""username"": 1 }, ""unique"": true },
+        { ""key"": { ""email"": 1 } }
+      ]
+    "
+  }
+}
+
+// ========================================
+// SECTION: Edge Cases
+// ========================================
+
+edge-cases
+{
+  // Identifier with special characters
+  file-path = c:\windows\system32\config.sys
+  url = https://example.com:8080/path?query=value
+  qualified-type = My.Namespace.Type,Assembly.Name
+  
+  // Mixed brackets in identifiers
+  array-notation = items[0].property
+  method-call = Calculate(a,b,c)
+  
+  // Empty string values
+  empty-double = ""
+  empty-single = ''
+  empty-verbatim = $""
+  
+  // String with only spaces
+  spaces = "   "
+  
+  // Escape sequences showcase
+  all-escapes = "Quote:\" Backslash:\\ Null:\0 Bell:\a Back:\b Form:\f New:\n Return:\r Tab:\t Vertical:\v Unicode:\u263A Hex:\xFF"
+}
+
+/* Final multi-line comment
+   Testing comment at end of file
+   with structural characters { } = inside
+   and "quoted strings" */
+
+// End of comprehensive test file
